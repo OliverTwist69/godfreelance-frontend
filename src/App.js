@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div style={{ padding: "30px" }}>
-      <h1>Фриланс Биржа 🚀</h1>
+      <h1>Фриланс Биржа 1🚀1</h1>
 
       <div style={{ marginBottom: "30px" }}>
         <input
