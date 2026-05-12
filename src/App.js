@@ -11,20 +11,20 @@ function App() {
 
   const loadJobs = () => {
     fetch("https://my-project-backend1.onrender.com/jobs")
-      .then(res => res.json())
-      .then(data => setJobs(data));
+      .then((res) => res.json())
+      .then((data) => setJobs(data));
   };
 
   const addJob = async () => {
     await fetch("https://my-project-backend1.onrender.com/jobs", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title,
-        price
-      })
+        price,
+      }),
     });
 
     setTitle("");
@@ -34,10 +34,10 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Фриланс Биржа 1🚀1</h1>
+    <div style={{ padding: "20px" }}>
+      <h1>GodFreelance 🚀</h1>
 
-      <div style={{ marginBottom: "30px" }}>
+      <div style={{ marginBottom: "20px" }}>
         <input
           placeholder="Название заказа"
           value={title}
@@ -55,18 +55,19 @@ function App() {
         </button>
       </div>
 
-      {jobs.map(job => (
+      {jobs.map((job) => (
         <div
           key={job._id}
           style={{
             border: "1px solid gray",
-            padding: "20px",
-            marginBottom: "20px",
-            borderRadius: "10px"
+            padding: "10px",
+            marginBottom: "10px",
           }}
         >
           <h2>{job.title}</h2>
-          <p>💰 {job.price}$</p>
+          <p>💰 ${job.price}</p>
+
+          <button>Откликнуться</button>
         </div>
       ))}
     </div>
