@@ -8,6 +8,8 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
   useEffect(() => {
@@ -15,6 +17,14 @@ function App() {
     fetch("https://my-project-backend1.onrender.com/jobs")
       .then(res => res.json())
       .then(data => setJobs(data));
+
+
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLoggedIn(true);
+    }
 
   }, []);
 
@@ -67,6 +77,8 @@ function App() {
 
       localStorage.setItem("token", data.token);
 
+      setIsLoggedIn(true);
+
       alert("Вход выполнен");
 
     } else {
@@ -78,41 +90,81 @@ function App() {
 
 
 
+
+  const logout = () => {
+
+    localStorage.removeItem("token");
+
+    setIsLoggedIn(false);
+
+  };
+
+
+
+
   return (
     <div style={{ padding: 20 }}>
 
-      <h1>GODFREELANCE</h1>
+      <h1>GODFREELANCE 🚀</h1>
 
-      <h2>Регистрация / Вход</h2>
 
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
 
-      <br />
-      <br />
+      {isLoggedIn ? (
 
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div>
 
-      <br />
-      <br />
+          <h3>Вы вошли как:</h3>
 
-      <button onClick={register}>
-        Регистрация
-      </button>
+          <p>{email}</p>
 
-      <button onClick={login}>
-        Войти
-      </button>
+          <button onClick={logout}>
+            Выйти
+          </button>
+
+        </div>
+
+      ) : (
+
+        <div>
+
+          <h2>Регистрация / Вход</h2>
+
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <br />
+          <br />
+
+          <input
+            type="password"
+            placeholder="Пароль"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <br />
+          <br />
+
+          <button onClick={register}>
+            Регистрация
+          </button>
+
+          <button onClick={login}>
+            Войти
+          </button>
+
+        </div>
+
+      )}
+
+
 
       <hr />
+
+
 
       <h2>Заказы</h2>
 
@@ -130,6 +182,10 @@ function App() {
           <h3>{job.title}</h3>
 
           <p>{job.price}$</p>
+
+          <button>
+            Откликнуться
+          </button>
 
         </div>
 
