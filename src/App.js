@@ -105,7 +105,7 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
 
-      <h1>GODFREELANCE1112 🚀</h1>
+      <h1>GODFREELANCE 🚀</h1>
 
 
 
